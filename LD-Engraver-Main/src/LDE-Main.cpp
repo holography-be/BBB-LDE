@@ -4,6 +4,9 @@
 // Master file
 //
 
+
+#include "LDE.h"
+
 #include <iostream>
 /**
  *
