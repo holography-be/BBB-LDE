@@ -11,16 +11,22 @@
 
 using namespace std;
 
-int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	return 0;
+void init() {
+
+
 }
 
-/**
- *
- * @param i
- * @return
- */
-int test(int i) {
-	return 1;
+void masterLoop() {
+	for (;;) {
+
+	}
 }
+
+int main() {
+	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	init();
+	masterLoop();
+	return 0;  // never reached
+}
+
+
