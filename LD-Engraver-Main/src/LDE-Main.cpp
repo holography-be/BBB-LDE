@@ -26,9 +26,11 @@ void masterLoop() {
 }
 
 int main() {
+	unsigned char level = 10;
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	init();
-	masterLoop();
+	cout << volt[level] <<endl;
+	//init();
+	//masterLoop();
 	//GPIO *led = new GPIO(15);
 	return 0;  // never reached
 }
