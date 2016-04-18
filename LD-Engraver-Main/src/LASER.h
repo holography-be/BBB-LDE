@@ -8,22 +8,18 @@
 #ifndef LASER_H_
 #define LASER_H_
 
-#include "pins.h"
+#include "LDE.h"
 #include "DAC.h"
 
-class LASER {
-public:
-	LASER();
-	virtual ~LASER();
-	int setLevel(int level);
-	void start();
-	void stop();
-	void emergencyStop();
-
-private:
-	DAC *dac;
 
 
-};
+int laser_Init();
+int laser_SetLevel(int level);
+int laser_GetLevel();
+void laser_Start();
+void laser_Stop();
+void laser_EmergencyStop();
+float laser_Temp();
+
 
 #endif /* LASER_H_ */

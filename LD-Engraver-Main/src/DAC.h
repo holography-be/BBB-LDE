@@ -10,6 +10,8 @@
 #ifndef DAC_H_
 #define DAC_H_
 
+#include "LDE.h"
+
 class DAC {
 
 private:

@@ -28,8 +28,12 @@
 
 #ifndef GPIO_H_
 #define GPIO_H_
-#include<string>
-#include<fstream>
+
+#include "LDE.h"
+
+#include <string>
+#include <fstream>
+
 using std::string;
 using std::ofstream;
 

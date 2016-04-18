@@ -6,6 +6,7 @@
 
 
 #include "LDE.h"
+#include "LASER.h"
 
 #include <iostream>
 /**
@@ -14,8 +15,13 @@
 
 using namespace std;
 
-void init() {
+int emergencyStop() {
+	laser_EmergencyStop();
+	return 1;
+}
 
+void init() {
+	laser_Init();
 
 }
 
@@ -31,7 +37,8 @@ int main() {
 	cout << volt[level] <<endl;
 	//init();
 	//masterLoop();
-	//GPIO *led = new GPIO(15);
+	GPIO *led = new GPIO(15);
+
 	return 0;  // never reached
 }
 

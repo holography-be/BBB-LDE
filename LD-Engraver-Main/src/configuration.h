@@ -14,9 +14,10 @@
 
 // Laser
 #define MAX_LASER_TEMP			35
-#define LASER_START_SEQUENCE	LASER_MASTER_RELAIS,LASER_FAN,LASER_PELTIER_PSU,LASER_DRIVER_PSU,LASER_DIODE_PSU
-#define LASER_STOP_SEQUENCE		LASER_DIODE_PSU,LASER_DRIVER_PSU,LASER_PELTIER_PSU,LASER_FAN,LASER_MASTER_RELAIS
-#define LASER_DELAY_SEQUENCE	500		// delais entre les étapes start/stop (en millisecondes)
+#define LASER_DELAY_SEQUENCE	500000		// delais entre les étapes start/stop (en microseconde - 1 milli = 1000 micro)
+
+// Security check interval
+#define SecurityCheck			1			//en seconde
 
 // Travel limits after homing
 #define X_MAX_POS 500
