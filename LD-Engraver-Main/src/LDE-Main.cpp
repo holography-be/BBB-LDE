@@ -15,9 +15,11 @@
 
 using namespace std;
 
-int emergencyStop() {
+void emergencyStop() {
 	laser_EmergencyStop();
-	return 1;
+	cout << "EMERGENCY STOP." << endl;
+
+	for (;;) {}
 }
 
 void init() {
@@ -35,9 +37,10 @@ int main() {
 	unsigned char level = 10;
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 	cout << volt[level] <<endl;
-	//init();
+	cout << "Initialisation" << endl;
+	init();
 	//masterLoop();
-	GPIO *led = new GPIO(15);
+	//GPIO *led = new GPIO(15);
 
 	return 0;  // never reached
 }

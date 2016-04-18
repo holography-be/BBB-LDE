@@ -30,6 +30,8 @@
 #define UDP_PORT_LISTENER		9000		// port pour communication TCP
 #define BAUDRATE				115200		// Serial Speed
 
+#define LASER_ERROR_01			-1			// Laser OFF
+#define LASER_ERROR_02			-2			// Incorrect Level
 
 
 #endif

@@ -9,6 +9,8 @@
 #include "LASER.h"
 #include "LDE.h"
 
+bool IsRunning;
+bool IsON;
 int currentLevel = 0;
 
 GPIO *Laser_Master_Relais;
@@ -22,6 +24,10 @@ GPIO *LaserSequence[5] = {Laser_Master_Relais, Laser_Fan, Laser_Peltier_PSU, Las
 DAC *dac;
 
 int laser_Init() {
+	IsON = false;
+	IsRunning = false;
+	// Level à 0
+	currentLevel = 0;
 	Laser_Master_Relais = new GPIO(LASER_MASTER_RELAIS);
 	Laser_Driver_PSU = new GPIO(LASER_DRIVER_PSU);
 	Laser_Peltier_PSU = new GPIO(LASER_PELTIER_PSU);
@@ -43,8 +49,8 @@ int laser_Init() {
 }
 
 int laser_SetLevel(int level) {
+	if ((level < 0) || (level > 255)) return LASER_ERROR_02;
 	if (level == currentLevel) return level;
-
 	currentLevel = level;
 	return 1;
 }
@@ -53,41 +59,74 @@ int laser_GetLevel() {
 	return currentLevel;
 }
 
-int laser_ForceLevel(int level) {
+int p_laser_ForceLevel(int level) {
 	// force level, en cas de problème
-
-
 	currentLevel = level;
 	return level;
 }
 
-void laser_Start() {
+int laser_Alimentation_ON() {
 	// shutdown laser power
-	laser_ForceLevel(0);
+	p_laser_ForceLevel(0);
 	for (int i = 0; i < 5; i++) {
 		LaserSequence[i]->setValue(GPIO::LOW);
 		// Tempo
 		usleep(LASER_DELAY_SEQUENCE);
 	}
+	IsON = true;
+	return 1;
 }
 
-void laser_Stop() {
+int laser_Alimentation_OFF() {
 	// shutdown laser power
-	laser_ForceLevel(0);
+	p_laser_ForceLevel(0);
 	for (int i = 4; i < 0; i++) {
 		LaserSequence[i]->setValue(GPIO::LOW);
 		// Tempo
 		usleep(LASER_DELAY_SEQUENCE);
 	}
+	IsON= true;
+	IsRunning = false;
+	return 1;
 }
 
-void laser_EmergencyStop() {
-	laser_ForceLevel(0);
+int p_setLaserPower(int level) {
+	if (level == currentLevel) return level;
+	currentLevel = level;
+	return level;
+}
+
+int laser_ON() {
+	if (IsON == false) return LASER_ERROR_01;
+	IsRunning = true;
+	return p_setLaserPower(currentLevel);
+}
+
+int laser_ON(int level) {
+	if (IsON == false) return LASER_ERROR_01;
+	IsRunning = true;
+	return p_setLaserPower(level);
+}
+
+int laser_OFF() {
+	if (IsON == false) return LASER_ERROR_01;
+	IsRunning = false;
+	return p_setLaserPower(0);
+}
+
+int laser_EmergencyStop() {
+	p_laser_ForceLevel(0);
 	for (int i = 4; i < 0; i++) {
 		LaserSequence[i]->setValue(GPIO::LOW);
 		// pas de tempo
 	}
+	IsRunning = false;
+	IsON = false;
+	return 1;
 }
+
+
+
 
 float laser_Temp() {
 		// resistance at 25 degrees C

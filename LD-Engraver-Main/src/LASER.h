@@ -16,9 +16,14 @@
 int laser_Init();
 int laser_SetLevel(int level);
 int laser_GetLevel();
-void laser_Start();
-void laser_Stop();
-void laser_EmergencyStop();
+int laser_Alimentation_ON();
+int laser_Alimention_OFF();
+int laser_ON();
+int laser_ON(int level);
+int laser_OFF();
+bool isRunning();
+bool isON();
+int laser_EmergencyStop();
 float laser_Temp();
 
 
